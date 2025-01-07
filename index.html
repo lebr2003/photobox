@@ -129,8 +129,8 @@ let queryString = urlParams.get('photo'); // Dropbox-Link zum Bild
 
 if (queryString) {
     // Direkte Bild-URL und Download-Link erstellen
-    let imageLink = queryString
-    let downloadLink = queryString
+    let imageLink = '/photos/' + queryString
+    let downloadLink = '/photos/' + queryString
 
     // Bild im Container anzeigen
     const imageContainer = document.getElementById('imageContainer');
