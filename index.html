@@ -114,7 +114,7 @@
             <a href="https://www.youtube.com/leanderbr" target="_blank">
                 <i class="fab fa-youtube"></i>
             </a>
-            <a href="mailto:photography@leanderbrunar" target="_blank">
+            <a href="mailto:photography@leanderbrunar.net" target="_blank">
                 <i class="fas fa-envelope"></i>
             </a>
             <a href="https://leanderbrunar.net" target="_blank">
@@ -124,22 +124,30 @@
     </div>
 
     <script>
-        // Abfrageparameter aus der URL auslesen
-        const urlParams = new URLSearchParams(window.location.search);
-        const photo = urlParams.get('photo'); // "12345.jpg"
+const urlParams = new URLSearchParams(window.location.search);
+let photoLink = urlParams.get('photo'); // Dropbox-Link zum Bild
 
-        if (photo) {
-            // Bild im Container anzeigen
-            const imageContainer = document.getElementById('imageContainer');
-            imageContainer.innerHTML = `<img src="/photos/${photo}" alt="Foto">`;
+if (photoLink) {
+    // Direkte Bild-URL und Download-Link erstellen
+    let imageLink = photoLink.replace('www.dropbox.com', 'dl.dropboxusercontent.com');
+    let downloadLink = photoLink + (photoLink.includes('?') ? '&dl=1' : '?dl=1');
 
-            // Download-Link aktualisieren
-            const downloadButton = document.getElementById('downloadButton');
-            downloadButton.href = `/photos/${photo}`;
-        } else {
-            document.getElementById('imageContainer').innerHTML = '<p>Kein Bild gefunden.</p>';
-            document.getElementById('downloadButton').style.display = 'none';
-        }
+
+    // Bild im Container anzeigen
+    const imageContainer = document.getElementById('imageContainer');
+    imageContainer.innerHTML = `<img src="${imageLink}" alt="Foto" style="max-width: 100%; height: auto;">`;
+
+    // Download-Link aktualisieren
+    const downloadButton = document.getElementById('downloadButton');
+    downloadButton.href = downloadLink;
+} else {
+    document.getElementById('imageContainer').innerHTML = '<p>Kein Bild gefunden.</p>';
+    document.getElementById('downloadButton').style.display = 'none';
+}
+
+
+
+
     </script>
 
 </body>
