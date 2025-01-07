@@ -125,20 +125,32 @@
 
     <script>
 const urlParams = new URLSearchParams(window.location.search);
-let photoLink = urlParams.get('photo'); // Dropbox-Link zum Bild
+let queryString = urlParams.get('photo'); // Dropbox-Link zum Bild
 
-if (photoLink) {
+if (queryString) {
     // Direkte Bild-URL und Download-Link erstellen
-    let imageLink = 'https://dl.dropboxusercontent.com/' + photoLink; // am Anfang vom Link 'dl.dropboxusercontent.com/' hinzufügen
-    let downloadLink = 'https://www.dropbox.com/' + photoLink + (photoLink.includes('?') ? '&dl=1' : '?dl=1'); // Download-Link anpassen
+    let imageLink = 'https://dl.dropboxusercontent.com/' + queryString;
+    let downloadUrl = 'https://www.dropbox.com/' + queryString + (queryString.includes('?') ? '&dl=1' : '?dl=1');
+
 
     // Bild im Container anzeigen
     const imageContainer = document.getElementById('imageContainer');
     imageContainer.innerHTML = `<img src="${imageLink}" alt="Foto" style="max-width: 100%; height: auto;">`;
 
-    // Download-Link aktualisieren
+    // Download-Link für den Button setzen
     const downloadButton = document.getElementById('downloadButton');
-    downloadButton.href = downloadLink;
+    downloadButton.href = downloadUrl;
+
+    // Klick-Event hinzufügen, um den Download zu starten, ohne die Seite zu verlassen
+    downloadButton.addEventListener('click', function(event) {
+        event.preventDefault(); // Verhindert, dass der Browser die Seite wechselt
+        const downloadLink = document.createElement('a');
+        downloadLink.href = downloadUrl;
+        downloadLink.download = ''; // Setzt den Download-Attribut, um den Download zu erzwingen
+        document.body.appendChild(downloadLink);
+        downloadLink.click(); // Startet den Download
+        document.body.removeChild(downloadLink); // Entfernt das Element nach dem Klick
+    });
 } else {
     document.getElementById('imageContainer').innerHTML = '<p>Kein Bild gefunden.</p>';
     document.getElementById('downloadButton').style.display = 'none';
