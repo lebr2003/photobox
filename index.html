@@ -131,11 +131,11 @@
         if (photo) {
             // Bild im Container anzeigen
             const imageContainer = document.getElementById('imageContainer');
-            imageContainer.innerHTML = `<img src="/photobox/photos/${photo}" alt="Foto">`;
+            imageContainer.innerHTML = `<img src="/photos/${photo}" alt="Foto">`;
 
             // Download-Link aktualisieren
             const downloadButton = document.getElementById('downloadButton');
-            downloadButton.href = `/photobox/photos/${photo}`;
+            downloadButton.href = `/photos/${photo}`;
         } else {
             document.getElementById('imageContainer').innerHTML = '<p>Kein Bild gefunden.</p>';
             document.getElementById('downloadButton').style.display = 'none';
