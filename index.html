@@ -129,9 +129,8 @@ let photoLink = urlParams.get('photo'); // Dropbox-Link zum Bild
 
 if (photoLink) {
     // Direkte Bild-URL und Download-Link erstellen
-    let imageLink = photoLink.replace('www.dropbox.com', 'dl.dropboxusercontent.com');
-    let downloadLink = photoLink + (photoLink.includes('?') ? '&dl=1' : '?dl=1');
-
+    let imageLink = 'https://dl.dropboxusercontent.com/' + photoLink; // am Anfang vom Link 'dl.dropboxusercontent.com/' hinzufügen
+    let downloadLink = 'https://www.dropbox.com/' + photoLink + (photoLink.includes('?') ? '&dl=1' : '?dl=1'); // Download-Link anpassen
 
     // Bild im Container anzeigen
     const imageContainer = document.getElementById('imageContainer');
