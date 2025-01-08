@@ -11,13 +11,13 @@
     <link rel="stylesheet" href="https://use.typekit.net/pen1ayd.css">
 
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VBTEF3MQEQ"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3TFH1JC7RX"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
-      gtag('config', 'G-VBTEF3MQEQ');
+      gtag('config', 'G-3TFH1JC7RX');
     </script>
 
     <!-- FontAwesome for social media icons -->
@@ -34,7 +34,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             flex-direction: column;
         }
         .container {
@@ -90,6 +90,18 @@
         .social-media a:hover {
             color: #4c86c5;
         }
+        .footer-class {
+            text-align: center;
+            margin-top: 20px;
+            color: #333;
+            font-size: 0.8em;
+        }
+        .footer-class a {
+            color: #333;
+        }
+        .footer-class a:hover {
+            color: #4c86c5;
+        }
     </style>
 </head>
 <body>
@@ -123,14 +135,29 @@
         </div>
     </div>
 
+
+    <footer class="footer-class">
+        <a href="impressum.html" style="text-decoration: none;">Impressum</a> |
+        <a href="datenschutz.html" style="text-decoration: none;">Datenschutzerklärung</a>
+    </footer>
+
+
     <script>
 const urlParams = new URLSearchParams(window.location.search);
 let queryString = urlParams.get('photo'); // Dropbox-Link zum Bild
 
 if (queryString) {
-    // Direkte Bild-URL und Download-Link erstellen
-    let imageLink = '/photos/' + queryString
-    let downloadLink = '/photos/' + queryString
+
+    // Den aktuellen Pfad der Seite ermitteln
+    let currentPath = window.location.pathname;
+
+    // Den Basispfad ableiten, indem du den letzten Teil des Pfads (z.B. 'index.html') entfernst
+    let basePath = currentPath.substring(0, currentPath.lastIndexOf('/') + 1);
+
+    // Die gewünschten Links erstellen
+    let imageLink = basePath + 'photos/' + queryString;
+    let downloadLink = basePath + 'photos/' + queryString;
+
 
     // Bild im Container anzeigen
     const imageContainer = document.getElementById('imageContainer');
@@ -139,6 +166,12 @@ if (queryString) {
     // Download-Link aktualisieren
     const downloadButton = document.getElementById('downloadButton');
     downloadButton.href = downloadLink;
+
+    // Ereignis an Google Analytics senden
+    gtag('event', 'Photo', {
+        'Quelle': queryString // Verwende die ID des Elements als Label
+    });
+
 } else {
     document.getElementById('imageContainer').innerHTML = '<p>Kein Bild gefunden.</p>';
     document.getElementById('downloadButton').style.display = 'none';

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Photobox</title>
+    <title>Photobox - Seite nicht gefunden</title>
 
     <meta  property="og:image" content="https://cdn.myportfolio.com/45979554-5507-4831-a885-c05d530ea5de/18a55f3d-2fda-4cc6-ac7e-9c537b1f69c6_rwc_0x0x421x421x421.jpeg?h=dc8ec43183666b59b44a07bd105c3f31" />
     <link rel="icon" href="https://cdn.myportfolio.com/45979554-5507-4831-a885-c05d530ea5de/3196d310-9f5c-4aa3-9efd-229f42032276_carw_1x1x32.jpeg?h=fd0310396e87cc87e9afb7e4d343984e" />
@@ -54,16 +54,9 @@
         h2 {
             font-size: 1.5em;
             color: #4c86c5;
-            margin-bottom: 20px;
+            margin-bottom: 40px;
         }
-        .image-container {
-            margin-bottom: 25px;
-        }
-        .image-container img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-        }
+
         .download-button {
             background-color: #022a55;
             color: white;
@@ -90,20 +83,29 @@
         .social-media a:hover {
             color: #4c86c5;
         }
+        .footer-class {
+            text-align: center;
+            margin-top: 20px;
+            color: #333;
+            font-size: 0.8em;
+        }
+        .footer-class a {
+            color: #333;
+        }
+        .footer-class a:hover {
+            color: #4c86c5;
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>PHOTOBOX</h1>
-        <h2>by Leander Brunar</h2>
+        <h1>404 - Seite nicht gefunden</h1>
+        <h2>Die angeforderte Seite konnte nicht gefunden werden</h2>
 
-        <div class="image-container" id="imageContainer">
-            <!-- Hier wird das Bild dynamisch eingefügt -->
-        </div>
 
-        <a id="downloadButton" class="download-button" href="#" download>
-            Bild herunterladen
+        <a id="downloadButton" class="download-button" href="enter.html" >
+            Zurück zur Startseite
         </a>
 
         <!-- Social Media Icons -->
@@ -123,31 +125,12 @@
         </div>
     </div>
 
-    <script>
-const urlParams = new URLSearchParams(window.location.search);
-let queryString = urlParams.get('photo'); // Dropbox-Link zum Bild
-
-if (queryString) {
-    // Direkte Bild-URL und Download-Link erstellen
-    let imageLink = 'https://dl.dropboxusercontent.com/' + queryString;
-    let downloadLink = 'https://www.dropbox.com/' + queryString + (queryString.includes('?') ? '&dl=1' : '?dl=1');
-
-    // Bild im Container anzeigen
-    const imageContainer = document.getElementById('imageContainer');
-    imageContainer.innerHTML = `<img src="${imageLink}" alt="Foto" style="max-width: 100%; height: auto;">`;
-
-    // Download-Link aktualisieren
-    const downloadButton = document.getElementById('downloadButton');
-    downloadButton.href = downloadLink;
-} else {
-    document.getElementById('imageContainer').innerHTML = '<p>Kein Bild gefunden.</p>';
-    document.getElementById('downloadButton').style.display = 'none';
-}
+    <footer class="footer-class">
+        <a href="impressum.html" style="text-decoration: none;">Impressum</a> |
+        <a href="datenschutz.html" style="text-decoration: none;">Datenschutzerklärung</a>
+    </footer>
 
 
-
-
-    </script>
 
 </body>
 </html>

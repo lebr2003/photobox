@@ -34,7 +34,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             flex-direction: column;
         }
         .container {
@@ -56,13 +56,16 @@
             color: #4c86c5;
             margin-bottom: 20px;
         }
-        .image-container {
-            margin-bottom: 25px;
+        .input-container {
+            margin-bottom: 40px;
         }
-        .image-container img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
+        .input-container input {
+            padding: 10px;
+            font-size: 1.2em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 80%;
+            max-width: 400px;
         }
         .download-button {
             background-color: #022a55;
@@ -90,6 +93,18 @@
         .social-media a:hover {
             color: #4c86c5;
         }
+        .footer-class {
+            text-align: center;
+            margin-top: 20px;
+            color: #333;
+            font-size: 0.8em;
+        }
+        .footer-class a {
+            color: #333;
+        }
+        .footer-class a:hover {
+            color: #4c86c5;
+        }
     </style>
 </head>
 <body>
@@ -98,12 +113,14 @@
         <h1>PHOTOBOX</h1>
         <h2>by Leander Brunar</h2>
 
-        <div class="image-container" id="imageContainer">
-            <!-- Hier wird das Bild dynamisch eingefügt -->
+        <!-- Eingabefeld für den Benutzer -->
+        <div class="input-container">
+            <input type="text" id="searchInput" placeholder="Bildname eingeben..." onkeypress="handleKeyPress(event)">
         </div>
 
-        <a id="downloadButton" class="download-button" href="#" download>
-            Bild herunterladen
+        <!-- Button zum Suchen -->
+        <a id="downloadButton" class="download-button" href="#" onclick="searchImage()">
+            Suchen
         </a>
 
         <!-- Social Media Icons -->
@@ -123,30 +140,28 @@
         </div>
     </div>
 
+    <footer class="footer-class">
+        <a href="impressum.html" style="text-decoration: none;">Impressum</a> |
+        <a href="datenschutz.html" style="text-decoration: none;">Datenschutzerklärung</a>
+    </footer>
+
     <script>
-const urlParams = new URLSearchParams(window.location.search);
-let queryString = urlParams.get('photo'); // Dropbox-Link zum Bild
+        function searchImage() {
+            var query = document.getElementById('searchInput').value.trim();
 
-if (queryString) {
-    // Direkte Bild-URL und Download-Link erstellen
-    let imageLink = 'https://dl.dropboxusercontent.com/' + queryString;
-    let downloadLink = 'https://www.dropbox.com/' + queryString + (queryString.includes('?') ? '&dl=1' : '?dl=1');
+            if (query !== "") {
+                var searchLink = 'index.html?photo=' + encodeURIComponent(query);
+                window.location.href = searchLink;  // Leitet zur Seite mit dem Foto
+            } else {
+                alert("Bitte einen Bildnamen eingeben.");
+            }
+        }
 
-    // Bild im Container anzeigen
-    const imageContainer = document.getElementById('imageContainer');
-    imageContainer.innerHTML = `<img src="${imageLink}" alt="Foto" style="max-width: 100%; height: auto;">`;
-
-    // Download-Link aktualisieren
-    const downloadButton = document.getElementById('downloadButton');
-    downloadButton.href = downloadLink;
-} else {
-    document.getElementById('imageContainer').innerHTML = '<p>Kein Bild gefunden.</p>';
-    document.getElementById('downloadButton').style.display = 'none';
-}
-
-
-
-
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                 searchImage();
+            }
+        }
     </script>
 
 </body>
